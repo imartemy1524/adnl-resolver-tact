@@ -4,6 +4,6 @@ export const compile: CompilerConfig = {
     lang: 'tact',
     target: 'contracts/adnl_resolver.tact',
     options: {
-        debug: true,
+        debug: false,
     },
 };
