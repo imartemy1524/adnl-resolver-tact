@@ -1,4 +1,6 @@
-# adnl-resolver
+# ADNL subdomains resolver
+
+This repo contains smart-contracts for resolving ADNL subdomains: it converts them from "string" format (base32; hex) to the ADNL Address (uint256) and returns in specified "site" format.
 
 ## Project structure
 

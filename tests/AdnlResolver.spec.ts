@@ -60,6 +60,8 @@ describe('AdnlResolver', () => {
             beginCell().storeStringTail(domain).endCell().asSlice(),
             BigInt('0x' + sha256_sync('site').toString('hex')),
         );
+        const s = BigInt('0x' + sha256_sync('site').toString('hex'));
+        expect(s).toBe(0xfbae041b02c41ed0fd8a4efb039bc780dd6af4a1f0c420f42561ae705dda43fen)
         const ID = parseAnswer(answer, domain);
         expect(ID).not.toBeNull();
         expect(ID).toBe(0xcf3e650fce91bc1046dc10496e12685791b022a7fb249a2ba96406b5aae9b621n);
