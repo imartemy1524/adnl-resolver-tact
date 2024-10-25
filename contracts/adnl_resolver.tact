@@ -7,7 +7,7 @@ inline fun base32DigitToNumber(digit: Int): Int {
     if (digit >= 50 && digit <= 55) {
         return digit - 24;
     }
-    dump("ERROR");
+    require(false, "Invalid base32 digit");
     return 0;
 }
 extends inline fun upper(self: String): String {
