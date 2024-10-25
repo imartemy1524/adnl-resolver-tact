@@ -25,8 +25,7 @@ contract AdnlResolver with DNSResolver {
             dict.set(sha256("site"), dnsResolveWebsiteADNL(ans));
 
             let record = category == 0 ?  dict.asCell(): dict.get(category);
-            return DNSResolveResult{
-            prefix: subdomain.bits(), record};
+            return DNSResolveResult{ prefix: subdomain.bits(), record};
         }catch(e){
             dump(beginComment().concat("Error: ").concat(e.toString()).toCell());
             return DNSResolveResult{prefix: subdomain.bits(), record: null};

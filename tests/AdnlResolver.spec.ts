@@ -43,8 +43,30 @@ describe('AdnlResolver', () => {
         expect(ID).not.toBeNull();
         expect(ID).toBe(0xcf3e650fce91bc1046dc10496e12685791b022a7fb249a2ba96406b5aae9b621n);
     });
+    it('should resolve .adnl with 0', async () => {
+        const domain = '\0xht4zipz2i3yecg3qies3qsnblzdmbcu75sjgrlvfsannnk5g3cdrai\0';
+
+        const answer = await adnlResolver.getDnsresolve(
+            beginCell().storeStringTail(domain).endCell().asSlice(),
+            BigInt('0x' + sha256_sync('site').toString('hex')),
+        );
+        const ID = parseAnswer(answer, domain);
+        expect(ID).not.toBeNull();
+        expect(ID).toBe(0xcf3e650fce91bc1046dc10496e12685791b022a7fb249a2ba96406b5aae9b621n);
+    });
     it('should resolve raw', async ()=>{
         const domain = 'cf3e650fce91bc1046dc10496e12685791b022a7fb249a2ba96406b5aae9b621\0';
+        const answer = await adnlResolver.getDnsresolve(
+            beginCell().storeStringTail(domain).endCell().asSlice(),
+            BigInt('0x' + sha256_sync('site').toString('hex')),
+        );
+        const ID = parseAnswer(answer, domain);
+        expect(ID).not.toBeNull();
+        expect(ID).toBe(0xcf3e650fce91bc1046dc10496e12685791b022a7fb249a2ba96406b5aae9b621n);
+
+    });
+    it('should resolve raw with 0', async ()=>{
+        const domain = '\0cf3e650fce91bc1046dc10496e12685791b022a7fb249a2ba96406b5aae9b621\0';
         const answer = await adnlResolver.getDnsresolve(
             beginCell().storeStringTail(domain).endCell().asSlice(),
             BigInt('0x' + sha256_sync('site').toString('hex')),
