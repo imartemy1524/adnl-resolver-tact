@@ -24,7 +24,7 @@ extends inline fun upper(self: String): String {
     }
     return result.asSlice().asString();
 }
-inline fun decodeRawAdnl(data: String): Cell{
+inline fun decodeRawAdnl(data: String): Int{
     // Base32 decode
 //    let realBase32 = beginString().concat("F").concat(data.upper()).toSlice();
     let realBase32 = beginCell().storeUint(70, 8).storeSlice(data.upper().asSlice()).asSlice();
@@ -41,8 +41,7 @@ inline fun decodeRawAdnl(data: String): Cell{
 //    let notCropped = ans.endCell();
     let g = ans.asSlice();
     g.skipBits(8);
-    let final = g.loadBits(32*8);
-    return final.asCell();
+    return g.loadUint(256);
 }
 inline fun hexStringToDigit(ascii: Int): Int {
     // 0-9

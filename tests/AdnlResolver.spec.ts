@@ -78,6 +78,17 @@ describe('AdnlResolver', () => {
         expect(ID).toBe(0xcf3e650fce91bc1046dc10496e12685791b022a7fb249a2ba96406b5aae9b621n);
 
     });
+    it('should resolve adnl', async ()=>{
+        const domain =  'adnl\0cf3e650fce91bc1046dc10496e12685791b022a7fb249a2ba96406b5aae9b621\0';
+        const answer = await adnlResolver.getDnsresolve(
+            beginCell().storeStringTail(domain).endCell().asSlice(),
+            BigInt('0x' + sha256_sync('dns_next_resolver').toString('hex')),
+        );
+        expect(answer.prefix).toBe(4n*8n)
+        const slice = answer.record!!.asSlice();
+        expect(slice.loadUint(16)).toBe(0xba93);
+        expect(slice.loadAddress()).toEqualAddress(adnlResolver.address);
+    })
 });
 
 function parseAnswer(ans: DNSResolveResult, input: string): bigint | null {
